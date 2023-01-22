@@ -1,6 +1,6 @@
 # ShadowShell
 
-<img style="max-width: 500px" width="500px" max-width="500px" title="Get it? Shell!" src="https://i.imgur.com/gmsJJbZ.jpg">
+<img style="max-width: 500px" width="500px" max-width="500px" title="Get it? Shell!" src="https://i.imgur.com/RpRTZ3U.png">
 
 ## Overview
 A reverse shell for Windows to Windows application written in python
