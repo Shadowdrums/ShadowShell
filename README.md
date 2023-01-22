@@ -19,9 +19,9 @@ A reverse shell for Windows to Windows application written in python
 3. This application comes with a VBScript that you place in the target device startup folder and the Client.py in the Intel folder this will
    run client.py in the background on target device everytime the device is turned on.
 
-4. ShadowShell1.3A.py is optional for using this application and its preferable sue is on the host device. the key to use the terminal is "7331"
+4. ShadowShell1.3A.py is optional for using this application and its preferable use is on the host device. the key to use the terminal is "7331"
    and can be changed to what ever you prefer though note it only excepts numbers and no special characters or letters. Also not that the file path the ShadowShell 
-   uses is set for dsktop and a folder named projects and the server and client must be placed in that folder for the terminal to activate them if you
+   uses is set for desktop and a folder named projects and the server and client must be placed in that folder for the terminal to activate them if you
    chose to use it.
 
 5. This will give you a reverse shell into a windows computer and allow the user to use the targets command prompt. if you would like to use powershell
