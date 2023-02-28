@@ -27,6 +27,10 @@ A reverse shell for Windows to Windows application written in python
 5. This will give you a reverse shell into a windows computer and allow the user to use the targets command prompt. if you would like to use powershell
    you must use "powerhsell -command yourCommand" other wise the program will freeze and crash and you will have to reconnect.
 
+#### NOTE:
+
+client and server encode their traffic in Hexedecimal 
+
 ## Special thanks
 ##### Author
 - Shadowdrums
